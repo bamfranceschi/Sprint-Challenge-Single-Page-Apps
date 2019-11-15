@@ -30,11 +30,11 @@ export default function CharacterList() {
 
   return (
     <section className="character-list">
-      <div>
-        <SearchForm character={character} />
-      </div>
-
       <CharDiv>
+        <SearchForm character={character} />
+      </CharDiv>
+
+      {/* <CharDiv>
         {character.map(person => (
           <CharacterCard
             key={person.id}
@@ -45,7 +45,7 @@ export default function CharacterList() {
             gender={person.gender}
           />
         ))}
-      </CharDiv>
+      </CharDiv> */}
     </section>
   );
 }

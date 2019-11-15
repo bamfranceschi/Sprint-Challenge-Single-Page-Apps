@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const CardDiv = styled.div`
-  max-width: 300px;
+  width: 300px;
   max-height: 200px;
   background-color: white;
   margin: 20px;
