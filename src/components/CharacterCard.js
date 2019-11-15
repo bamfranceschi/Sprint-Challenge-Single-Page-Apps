@@ -17,7 +17,6 @@ export default function CharacterCard(props) {
       <h3>Name: {props.name}</h3>
       <h5>Status: {props.status}</h5>
       <p>Species: {props.species}</p>
-      <p>Type: {props.type}</p>
       <p>Gender: {props.gender}</p>
     </CardDiv>
   );

@@ -14,28 +14,47 @@ const CharDiv = styled.div`
   margin-right: 4%;
 `;
 
+function filterByTerm(characters, term) {
+  if (term === "" || !term) {
+    return characters;
+  }
+
+  return characters.filter(({ name }) =>
+    name.toLowerCase().includes(term.toLowerCase())
+  );
+}
+
 export default function CharacterList() {
-  const [character, setCharacter] = useState([]);
+  const [state, setState] = useState({ characterList: [], searchTerm: "" });
 
   useEffect(() => {
     axios
       .get("https://rickandmortyapi.com/api/character/")
       .then(response => {
-        setCharacter(response.data.results);
+        setState(s => ({ ...s, characterList: response.data.results }));
       })
       .catch(error => {
         console.log("There was an error fetching the data", error);
       });
-  }, [setCharacter]);
+  }, []);
+
+  const setSearchTerm = ({ target }) => {
+    if (target) {
+      setState(s => ({ ...s, searchTerm: target.value }));
+    }
+  };
+
+  const charactersToDisplay = filterByTerm(
+    state.characterList,
+    state.searchTerm
+  );
 
   return (
     <section className="character-list">
-      <CharDiv>
-        <SearchForm character={character} />
-      </CharDiv>
+      <SearchForm onSearchTerm={setSearchTerm} searchTerm={state.searchTerm} />
 
-      {/* <CharDiv>
-        {character.map(person => (
+      <CharDiv>
+        {charactersToDisplay.map(person => (
           <CharacterCard
             key={person.id}
             name={person.name}
@@ -45,7 +64,7 @@ export default function CharacterList() {
             gender={person.gender}
           />
         ))}
-      </CharDiv> */}
+      </CharDiv>
     </section>
   );
 }
