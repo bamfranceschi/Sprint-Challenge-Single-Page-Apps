@@ -6,7 +6,7 @@ export default function SearchForm(props) {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    const results = character.filter(person =>
+    const results = props.character.filter(person =>
       person.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
@@ -16,17 +16,24 @@ export default function SearchForm(props) {
     setSearchTerm(event.target.value);
   };
 
+  console.log(character);
+
   return (
     <section className="search-form">
       <form>
         <label htmlFor="search">Search:</label>
-        <input name="search" placeholder="search" onChange={handleChange} />
+        <input
+          name="search"
+          placeholder="search"
+          onChange={handleChange}
+          value={searchTerm}
+        />
       </form>
 
       <div>
         <ul>
-          {searchResults.map(props.person => (
-            <li key={props.person}>{props.person}</li>
+          {searchResults.map(person => (
+            <li key={person}>{person}</li>
           ))}
         </ul>
       </div>

@@ -31,7 +31,7 @@ export default function CharacterList() {
   return (
     <section className="character-list">
       <div>
-        <SearchForm />
+        <SearchForm character={character} />
       </div>
 
       <CharDiv>
